@@ -1,1 +1,1 @@
-rootProject.name = "Learning Gradle"
+rootProject.name = "30-sec-project"
