@@ -4,7 +4,9 @@ plugins {
     id("base")
 }
 
-tasks.register<Copy>("buildDescriptions") {
+defaultTasks("packageDescriptions")
+
+val buildDescriptions by tasks.registering(Copy::class) {
     description = "Copies descriptions to build directory. Replaces tokens."
     group = "descriptions"
     dependsOn("clean")
@@ -15,10 +17,10 @@ tasks.register<Copy>("buildDescriptions") {
     filter<ReplaceTokens>(mapOf("tokens" to mapOf("description" to "I am learning Gradle")))
 }
 
-tasks.register<Zip>("packageDescriptions") {
+val packageDescriptions by tasks.registering(Zip::class) {
     description = "Zips descriptions."
     group = "descriptions"
-    from(tasks.named("buildDescriptions"))
+    from(buildDescriptions)
     archiveFileName.set("descriptions.zip")
     destinationDirectory.set(layout.buildDirectory.dir("distributions"))
 }
