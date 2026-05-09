@@ -4,8 +4,6 @@ plugins {
     id("base")
 }
 
-defaultTasks("packageDescriptions")
-
 val buildDescriptions by tasks.registering(Copy::class) {
     description = "Copies descriptions to build directory. Replaces tokens."
     group = "descriptions"
@@ -24,3 +22,5 @@ val packageDescriptions by tasks.registering(Zip::class) {
     archiveFileName.set("descriptions.zip")
     destinationDirectory.set(layout.buildDirectory.dir("distributions"))
 }
+
+defaultTasks(packageDescriptions.name)
