@@ -4,6 +4,12 @@ plugins {
     base
 }
 
+base {
+    archivesName = "gradle"
+    distsDirectory = layout.buildDirectory.dir("custom-dist")
+    libsDirectory = layout.buildDirectory.dir("custom-libs")
+}
+
 val buildDescriptions by tasks.registering(Copy::class) {
     description = "Copies descriptions to build directory. Replaces tokens."
     group = "descriptions"
@@ -19,20 +25,8 @@ val packageDescriptions by tasks.registering(Zip::class) {
     description = "Zips descriptions."
     group = "descriptions"
     from(buildDescriptions)
-    archiveFileName.set("descriptions.zip")
-    destinationDirectory.set(layout.buildDirectory.dir("distributions"))
-    finalizedBy(finalizeThings)
-    doLast {
-        throw GradleException("""""")
-    }
+    //archiveFileName.set("descriptions.zip")
+    //destinationDirectory.set(layout.buildDirectory.dir("distributions"))
 }
 
 defaultTasks(packageDescriptions.name)
-
-val finalizeThings by tasks.registering {
-    description = "Finalizes things."
-    group = "Finalizes things."
-    doLast {
-        println("Finalizing things...")
-    }
-}
