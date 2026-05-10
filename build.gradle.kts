@@ -1,13 +1,13 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id("base")
+    base
 }
 
 val buildDescriptions by tasks.registering(Copy::class) {
     description = "Copies descriptions to build directory. Replaces tokens."
     group = "descriptions"
-    dependsOn("clean")
+    dependsOn(tasks.clean)
     from("descriptions") {
         include("*.txt")
     }
@@ -21,6 +21,18 @@ val packageDescriptions by tasks.registering(Zip::class) {
     from(buildDescriptions)
     archiveFileName.set("descriptions.zip")
     destinationDirectory.set(layout.buildDirectory.dir("distributions"))
+    finalizedBy(finalizeThings)
+    doLast {
+        throw GradleException("""""")
+    }
 }
 
 defaultTasks(packageDescriptions.name)
+
+val finalizeThings by tasks.registering {
+    description = "Finalizes things."
+    group = "Finalizes things."
+    doLast {
+        println("Finalizing things...")
+    }
+}
