@@ -1,4 +1,3 @@
-import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     base
@@ -11,6 +10,22 @@ application {
     mainClass = "com.anazzubair.gradle.MainKt"
 }
 
+tasks {
+    //disalbe the thin jar and related tasks from application plugin
+    jar { enabled = false }
+    distZip { enabled = false }
+    distTar { enabled = false }
+    installDist { enabled = false }
+
+    //depend on shadow plugin for distribution
+    shadowJar {
+        archiveClassifier = "all"
+        mergeServiceFiles()
+    }
+}
+
+
+
 val buildDescriptions by tasks.registering(Copy::class) {
     description = "Copies descriptions to build directory. Replaces tokens."
     group = "descriptions"
@@ -19,7 +34,9 @@ val buildDescriptions by tasks.registering(Copy::class) {
         include("*.txt")
     }
     into(layout.buildDirectory.dir("descriptions"))
-    filter<ReplaceTokens>(mapOf("tokens" to mapOf("description" to "I am learning Gradle")))
+    filter<org.apache.tools.ant.filters.ReplaceTokens>(
+        mapOf("tokens" to mapOf("description" to "I am learning Gradle"))
+    )
 }
 
 val packageDescriptions by tasks.registering(Zip::class) {
@@ -29,5 +46,3 @@ val packageDescriptions by tasks.registering(Zip::class) {
     archiveFileName.set("descriptions.zip")
     destinationDirectory.set(layout.buildDirectory.dir("distributions"))
 }
-
-defaultTasks(packageDescriptions.name)
