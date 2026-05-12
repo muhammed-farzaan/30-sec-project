@@ -1,7 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "30-sec-project"
+rootProject.name = "thirty-sec-project"
 
 pluginManagement {
     repositories {
