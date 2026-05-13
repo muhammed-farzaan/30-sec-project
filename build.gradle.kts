@@ -6,11 +6,20 @@ plugins {
     id("com.gradleup.shadow") version "9.4.1"
 }
 
+dependencies {
+    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
+    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
+}
+
 application {
     mainClass = "com.anazzubair.gradle.MainKt"
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
+
     //disalbe the thin jar and related tasks from application plugin
     jar { enabled = false }
     distZip { enabled = false }
