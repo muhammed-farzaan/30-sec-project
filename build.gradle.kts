@@ -1,14 +1,14 @@
 
 plugins {
     base
-    kotlin("jvm") version "2.3.0"
+    alias(libs.plugins.kotlin.jvm)
     application
-    id("com.gradleup.shadow") version "9.4.1"
+    alias(libs.plugins.shadow)
 }
 
 dependencies {
-    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
-    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
+    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest.assertions.core)
 }
 
 application {

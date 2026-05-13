@@ -27,3 +27,6 @@ Thumbs.db
 *.tmp
 *.swp
 *~
+
+#claude
+.claude
