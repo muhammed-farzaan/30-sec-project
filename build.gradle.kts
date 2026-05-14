@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     application
     alias(libs.plugins.shadow)
+    alias(libs.plugins.benmanes)
 }
 
 dependencies {
@@ -33,6 +34,9 @@ tasks {
     }
 }
 
+tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
+    notCompatibleWithConfigurationCache("The gradle-versions-plugin does not yet support the configuration cache.")
+}
 
 
 val buildDescriptions by tasks.registering(Copy::class) {

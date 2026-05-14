@@ -1,7 +1,8 @@
 [versions]
 kotlin = "2.3.0"
 shadow = "9.4.1"
-kotest = "5.9.1"
+kotest = "6.1.11"
+benmanes = "0.54.0"
 
 [libraries]
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
@@ -10,3 +11,4 @@ kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+benmanes = { id = "com.github.ben-manes.versions", version.ref = "benmanes" }
